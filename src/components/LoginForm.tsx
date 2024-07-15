@@ -1,17 +1,8 @@
 import { useState } from "react";
 import { z } from "zod";
-import "../styles/form.css";
+import "../styles/loginForm.css";
 
-const schema = z.object({
-  username: z
-    .string()
-    .min(3, "Username must be at least 3 characters long")
-    .max(20, "Username must not exceed 20 characters")
-    .regex(
-      /^[a-zA-Z0-9_]+$/,
-      "Username can only contain letters, numbers, and underscores"
-    ),
-
+const loginSchema = z.object({
   email: z
     .string()
     .email("Invalid email address")
@@ -28,9 +19,18 @@ const schema = z.object({
     ),
 });
 
-export function Form() {
-  const [formData, setFormData] = useState({
-    username: "",
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+interface FormProps {
+  onSubmit: (data: LoginFormData) => void;
+  isLoading?: boolean;
+}
+
+export function LoginForm({ onSubmit, isLoading = false }: FormProps) {
+  const [formData, setFormData] = useState<LoginFormData>({
     email: "",
     password: "",
   });
@@ -51,12 +51,14 @@ export function Form() {
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
 
-    const result = schema.safeParse(formData);
+    const result = loginSchema.safeParse(formData);
 
     if (!result.success) {
       setError(result.error.errors[0].message);
       return;
     }
+    setError(null);
+    onSubmit(result.data);
   }
 
   return (
@@ -64,37 +66,28 @@ export function Form() {
       <h1>Welcome to Blisko!</h1>
       <h2>The Ultimate Friendship Organizer</h2>
       <h3>Log in now and discover the magic of perfectly timed hangouts!</h3>
-      <label htmlFor="username">
-        Enter your cool nickname here
-        <input
-          type="text"
-          className="form__input-username"
-          name="username"
-          placeholder="Username"
-          onChange={handleChange}
-          value={formData.username}
-        />
-      </label>
       <label htmlFor="email">
         Where we send good vibes and friendship updates
         <input
-          type="text"
+          type="email"
           className="form__input-email"
           name="email"
           placeholder="Email"
           onChange={handleChange}
           value={formData.email}
+          required
         />
       </label>
       <label htmlFor="password">
         Shh… It’s the key to your social kingdom
         <input
-          type="text"
+          type="password"
           className="form__input-password"
           name="password"
           placeholder="Password"
           onChange={handleChange}
           value={formData.password}
+          required
         />
       </label>
       {error && (
@@ -102,7 +95,9 @@ export function Form() {
           {error}
         </p>
       )}
-      <button className="form__button-login">Login</button>
+      <button className="form__button-login" type="submit" disabled={isLoading}>
+        {isLoading ? "Logging in..." : "Login"}
+      </button>
     </form>
   );
 }
