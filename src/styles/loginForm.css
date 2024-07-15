@@ -13,11 +13,6 @@ body {
   align-items: flex-start;
 }
 
-.loging-page__image {
-  padding: 50px;
-  margin-top: 30px;
-}
-
 .loging-page__form-container {
   width: 50%;
   display: flex;
