@@ -1,6 +1,12 @@
+import { useState } from "react";
 import "../styles/form.css";
 
 export function Form() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   function handleChange() {
     console.log("I'm a function");
   }
