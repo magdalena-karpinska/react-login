@@ -7,8 +7,16 @@ export function Form() {
     email: "",
     password: "",
   });
-  function handleChange() {
-    console.log("I'm a function");
+  function handleChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: value,
+      };
+    });
   }
 
   return (
@@ -24,6 +32,7 @@ export function Form() {
           name="username"
           placeholder="Username"
           onChange={handleChange}
+          value={formData.username}
         />
       </label>
       <label htmlFor="email">
@@ -34,6 +43,7 @@ export function Form() {
           name="email"
           placeholder="Email"
           onChange={handleChange}
+          value={formData.email}
         />
       </label>
       <label htmlFor="password">
@@ -44,6 +54,7 @@ export function Form() {
           name="password"
           placeholder="Password"
           onChange={handleChange}
+          value={formData.password}
         />
       </label>
       <button className="form__button-login">Login</button>
