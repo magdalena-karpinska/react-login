@@ -69,15 +69,6 @@ p {
   margin-bottom: 0.5rem;
 }
 
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
 .form__error-message {
   color: red;
   margin-bottom: 1rem;
