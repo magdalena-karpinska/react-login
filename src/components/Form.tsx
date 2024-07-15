@@ -34,6 +34,7 @@ export function Form() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   function handleChange(
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -51,6 +52,11 @@ export function Form() {
     event.preventDefault();
 
     const result = schema.safeParse(formData);
+
+    if (!result.success) {
+      setError(result.error.errors[0].message);
+      return;
+    }
   }
 
   return (
@@ -91,6 +97,11 @@ export function Form() {
           value={formData.password}
         />
       </label>
+      {error && (
+        <p className="form__error-message" style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
       <button className="form__button-login">Login</button>
     </form>
   );
