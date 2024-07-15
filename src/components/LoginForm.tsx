@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { z } from "zod";
+import { LoginFormData } from "../types";
 import "../styles/loginForm.css";
 
 const loginSchema = z.object({
@@ -18,11 +19,6 @@ const loginSchema = z.object({
       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
     ),
 });
-
-interface LoginFormData {
-  email: string;
-  password: string;
-}
 
 interface FormProps {
   onSubmit: (data: LoginFormData) => void;
@@ -62,42 +58,55 @@ export function LoginForm({ onSubmit, isLoading = false }: FormProps) {
   }
 
   return (
-    <form id="loging-form" onSubmit={handleSubmit}>
-      <h1>Welcome to Blisko!</h1>
-      <h2>The Ultimate Friendship Organizer</h2>
-      <h3>Log in now and discover the magic of perfectly timed hangouts!</h3>
-      <label htmlFor="email">
-        Where we send good vibes and friendship updates
-        <input
-          type="email"
-          className="form__input-email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          value={formData.email}
-          required
+    <div className="loging-page">
+      <form className="loging-page__form" onSubmit={handleSubmit}>
+        <h1>Welcome to Blisko!</h1>
+        <h5>The Ultimate Friendship Organizer</h5>
+        <p>Log in now and discover the magic of perfectly timed hangouts!</p>
+        <label className="form__label" htmlFor="email">
+          Where we send good vibes and friendship updates
+          <input
+            type="email"
+            className="form__input-email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            value={formData.email}
+            required
+          />
+        </label>
+        <label className="form__label" htmlFor="password">
+          Shh… It’s the key to your social kingdom
+          <input
+            type="password"
+            className="form__input-password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            value={formData.password}
+            required
+          />
+        </label>
+        {error && (
+          <p className="form__error-message" style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
+        <button
+          className="form__button-loging"
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? "Logging in..." : "Login"}
+        </button>
+      </form>
+      <div className="loging-page__image-container">
+        <img
+          className="loging-page__image"
+          src="./src/assets/10124049.jpg"
+          alt="login illustration"
         />
-      </label>
-      <label htmlFor="password">
-        Shh… It’s the key to your social kingdom
-        <input
-          type="password"
-          className="form__input-password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          value={formData.password}
-          required
-        />
-      </label>
-      {error && (
-        <p className="form__error-message" style={{ color: "red" }}>
-          {error}
-        </p>
-      )}
-      <button className="form__button-login" type="submit" disabled={isLoading}>
-        {isLoading ? "Logging in..." : "Login"}
-      </button>
-    </form>
+      </div>
+    </div>
   );
 }

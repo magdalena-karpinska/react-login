@@ -1,0 +1,102 @@
+:root {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 80px;
+  padding: 0;
+}
+
+.loging-page {
+  display: flex;
+  align-items: flex-start;
+}
+
+.loging-page__image {
+  padding: 50px;
+  margin-top: 30px;
+}
+
+.loging-page__form-container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+}
+
+.loging-page__form {
+  width: 80%;
+  max-width: 400px;
+  margin-top: 2rem;
+  padding: 2rem;
+}
+
+.form__button-loging {
+  background-color: #ff3481;
+  border: none;
+  width: 100%;
+  padding: 0.75rem;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+h1,
+h5,
+p {
+  text-align: left;
+  color: black;
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 4rem;
+  font-size: 0.875rem;
+}
+
+.form__label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form__error-message {
+  color: red;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.form__input-email,
+.form__input-password {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.form__input-email:focus,
+.form__input-password:focus {
+  outline: none;
+  border: 1px solid #ffc146;
+  box-shadow: 0 0 0 1px #ffc146;
+}
