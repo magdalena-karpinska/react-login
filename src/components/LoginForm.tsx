@@ -66,25 +66,23 @@ export function LoginForm({ onSubmit, isLoading = false }: FormProps) {
         <label className="form__label" htmlFor="email">
           Where we send good vibes and friendship updates
           <input
-            type="email"
+            type="text"
             className="form__input-email"
             name="email"
             placeholder="Email"
             onChange={handleChange}
             value={formData.email}
-            required
           />
         </label>
         <label className="form__label" htmlFor="password">
           Shh… It’s the key to your social kingdom
           <input
-            type="password"
+            type="text"
             className="form__input-password"
             name="password"
             placeholder="Password"
             onChange={handleChange}
             value={formData.password}
-            required
           />
         </label>
         {error && (
